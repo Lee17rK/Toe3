@@ -182,6 +182,32 @@
             opacity: 0.9;
         }
 
+        /* Embedded Video Player Styling */
+        .video-player-wrapper {
+            margin-top: 20px;
+            width: 100%;
+            max-width: 200px; /* Keeps the shorts video from getting too wide */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border: 2px solid #444;
+            background: #000;
+        }
+
+        .video-player-wrapper iframe {
+            width: 100%;
+            aspect-ratio: 9 / 16; /* Perfect ratio for YouTube Shorts */
+            border: none;
+            display: block;
+        }
+
+        .video-title {
+            font-size: 13px;
+            color: #aaa;
+            margin-top: 10px;
+            margin-bottom: 0;
+        }
+
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
@@ -202,8 +228,8 @@
 <body>
 
     <div class="container">
-        <!-- Game Icon Inserted Here -->
-        <img src="1000189967.png" alt="Game Icon" class="game-icon">
+        <!-- Game Icon Inserted Here (Fixed Raw GitHub URL) -->
+        <img src="https://raw.githubusercontent.com/Lee17rK/Toe3/56b600255d0336edf13958befadcbb7f8e56d44d/Icon.png" alt="Game Icon" class="game-icon">
         
         <h1 class="main-title">MoDsWithK</h1>
         
@@ -222,11 +248,18 @@
                     <li>Latest v0.9.51 beta</li>
                     <li>Multiplayer working</li>
                 </ul>
-                <!-- Add the original game link to the href below -->
+                <!-- Main Original Download Link -->
                 <a href="https://play.google.com/store/apps/details?id=YOUR_GAME_ID_HERE" class="download-btn btn-original" target="_blank">
                     Get Original
                     <span class="file-name">Play Store Version</span>
                 </a>
+                
+                <!-- NEW: Embedded Direct Video Player for the Short -->
+                <p class="video-title">📺 How to install APKs:</p>
+                <div class="video-player-wrapper">
+                    <!-- YouTube Embed URL format -->
+                    <iframe src="https://www.youtube.com/embed/01tBMB88Sx0" title="How to install APKs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
             </div>
 
             <!-- Mod Version Side -->
