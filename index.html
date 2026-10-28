@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoDsWithK - Download</title>
+    <style>
+        /* Base page styling */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #121212;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            position: relative;
+        }
+
+        /* Centered content box */
+        .container {
+            text-align: center;
+            background: #1e1e1e;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            width: 90%;
+            max-width: 850px;
+            margin: 40px 0;
+        }
+
+        /* Game Icon */
+        .game-icon {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 5px 20px rgba(255, 140, 0, 0.4);
+            margin-bottom: 20px;
+            border: 4px solid #333;
+        }
+
+        /* Top Title Styling */
+        .main-title {
+            margin: 0 0 25px 0;
+            font-size: 42px;
+            font-weight: 900;
+            font-family: 'Arial Black', Impact, sans-serif;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #ff0000, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        /* YouTube Buttons Row */
+        .yt-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .yt-btn {
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .yt-btn:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+
+        .btn-subscribe { background-color: #ff0000; box-shadow: 0 4px 10px rgba(255, 0, 0, 0.4); }
+        .btn-like { background-color: #3ea6ff; box-shadow: 0 4px 10px rgba(62, 166, 255, 0.4); }
+        .btn-share { background-color: transparent; border: 2px solid #3ea6ff; color: #3ea6ff; padding: 8px 16px; }
+
+        /* Split Layout Container */
+        .split-layout {
+            display: flex;
+            gap: 30px;
+            justify-content: space-between;
+        }
+
+        /* Individual Columns */
+        .column {
+            flex: 1;
+            background: #282828;
+            padding: 30px 20px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .column h2 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 24px;
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        /* Features List */
+        .features {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .features li {
+            padding: 8px 0;
+            font-size: 16px;
+            border-bottom: 1px solid #333;
+            color: #ddd;
+        }
+
+        .features li::before {
+            content: "✔️";
+            margin-right: 8px;
+            font-size: 14px;
+        }
+
+        /* Animated Download Button */
+        .download-btn {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            border-radius: 40px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            width: 90%;
+            box-sizing: border-box;
+            margin-top: auto;
+        }
+
+        /* Original Button Styling */
+        .btn-original {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+            box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+        }
+        .btn-original:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(56, 239, 125, 0.7);
+        }
+
+        /* Mod Button Styling */
+        .btn-mod {
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            animation: pulse 2s infinite; 
+        }
+        .btn-mod:hover {
+            transform: scale(1.05);
+            animation: none;
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.7);
+        }
+
+        /* Custom File Name text inside the button */
+        .file-name {
+            display: block;
+            font-size: 12px;
+            font-weight: normal;
+            margin-top: 6px;
+            text-transform: none;
+            opacity: 0.9;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
+        }
+
+        /* Responsive stacking for mobile */
+        @media (max-width: 768px) {
+            .split-layout {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+    <!-- Adsterra Popunder Ad Script -->
+    <script src="https://rustydrawer.com/ab/cf/5b/abcf5be8c1657cf3c6c6c62cf93aa1b5.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Game Icon Inserted Here -->
+        <img src="1000189967.png" alt="Game Icon" class="game-icon">
+        
+        <h1 class="main-title">MoDsWithK</h1>
+        
+        <div class="yt-buttons">
+            <a href="https://youtube.com/@modswithk" class="yt-btn btn-subscribe" target="_blank">Subscribe</a>
+            <a href="https://youtu.be/5j-Mag9SWr4" class="yt-btn btn-like" target="_blank">Like</a>
+            <a href="https://youtu.be/5j-Mag9SWr4" class="yt-btn btn-share" target="_blank">Share</a>
+        </div>
+
+        <div class="split-layout">
+            <!-- Original Version Side -->
+            <div class="column">
+                <h2>Original Version</h2>
+                <ul class="features">
+                    <li>Playstore version</li>
+                    <li>Latest v0.9.51 beta</li>
+                    <li>Multiplayer working</li>
+                </ul>
+                <!-- Add the original game link to the href below -->
+                <a href="https://play.google.com/store/apps/details?id=YOUR_GAME_ID_HERE" class="download-btn btn-original" target="_blank">
+                    Get Original
+                    <span class="file-name">Play Store Version</span>
+                </a>
+            </div>
+
+            <!-- Mod Version Side -->
+            <div class="column">
+                <h2>Mod Version</h2>
+                <ul class="features">
+                    <li>Unlimited Money</li>
+                    <li>Golds</li>
+                    <li>Level 100</li>
+                    <li>Ad free</li>
+                    <li>Unlocked trailers</li>
+                    <li>V0.9.51</li>
+                </ul>
+                <a href="https://www.mediafire.com/file/1y1jokkdovp2brt/CCODv131M.apk/file" id="auto-download-btn" class="download-btn btn-mod" target="_blank">
+                    Download Mod
+                    <span id="auto-file-info" class="file-name">Fetching file info...</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer style="position: relative; margin-top: 20px; bottom: 10px; width: 100%; text-align: center; font-size: 12px; color: #555;">
+        &copy; 2026 MoDsWithK | All custom modifications are thoroughly tested.
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const btn = document.getElementById("auto-download-btn");
+            const infoSpan = document.getElementById("auto-file-info");
+            const mediafireUrl = btn.href;
+
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(mediafireUrl)}`;
+
+            try {
+                const response = await fetch(proxyUrl);
+                if (!response.ok) throw new Error("Network response failed");
+                const htmlString = await response.text();
+
+                let fileName = "Download Mod File";
+                const titleMatch = htmlString.match(/<meta property="og:title" content="([^"]+)"/i) || 
+                                   htmlString.match(/<title>(.*?)<\/title>/i);
+                
+                if (titleMatch && titleMatch[1]) {
+                    fileName = titleMatch[1].replace(' - MediaFire', '').trim();
+                }
+
+                let fileSize = "";
+                const sizeMatch = htmlString.match(/Download\s*\(([^)]+)\)/i) || 
+                                  htmlString.match(/File size:\s*<span>([^<]+)<\/span>/i);
+                
+                if (sizeMatch && sizeMatch[1]) {
+                    fileSize = sizeMatch[1];
+                }
+
+                if (fileSize) {
+                    infoSpan.textContent = `${fileName} (${fileSize})`;
+                } else {
+                    infoSpan.textContent = fileName;
+                }
+                
+                btn.setAttribute("download", fileName);
+
+            } catch (error) {
+                console.error("Failed to fetch data:", error);
+                infoSpan.textContent = "Click to Download Mod";
+            }
+        });
+    </script>
+
+    <!-- Adsterra Social Bar Ad Script -->
+    <script src="https://rustydrawer.com/b6/85/1b/b6851b7981e92bece08dbc72e94a795d.js"></script>
+</body>
+</html>
