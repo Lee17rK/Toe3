@@ -134,6 +134,11 @@
             font-size: 14px;
         }
 
+        /* Specific class for wrong mark */
+        .features li.no-support::before {
+            content: "❌";
+        }
+
         /* Animated Download Button */
         .download-btn {
             display: inline-block;
@@ -266,7 +271,7 @@
                 <h2>Original Version</h2>
                 <ul class="features">
                     <li>Playstore version</li>
-                    <li>Latest v0.9.51 beta</li>
+                    <li>Latest v0.9.52 beta</li>
                     <li>Multiplayer working</li>
                 </ul>
                 <!-- Main Original Download Link -->
@@ -290,12 +295,12 @@
                 <h2>Mod Version</h2>
                 <ul class="features">
                     <li>Unlimited Money</li>
-                    <li>No Multiplayer Support</li>
+                    <li class="no-support">No Multiplayer Support</li>
                     <li>Golds</li>
                     <li>Level 100</li>
                     <li>Ad free</li>
                     <li>Unlocked trailers</li>
-                    <li>V0.9.51</li>
+                    <li>V0.9.52</li>
                 </ul>
                 <a href="https://github.com/Lee17rK/Toe3/releases/download/Toe3/TOE3Mv.MoDsWithK._0.9.52.apk" id="auto-download-btn" class="download-btn btn-mod" target="_blank">
                     Download Mod Here
