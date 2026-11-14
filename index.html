@@ -168,13 +168,8 @@
 
         /* Mod Button Styling */
         .btn-mod {
-            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
-            animation: pulse 2s infinite; 
-        }
-        .btn-mod:hover {
-            transform: scale(1.05);
-            animation: none;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.7);
+            background: linear-gradient(45deg, #444, #777); /* Greyscale to show disabled state */
+            cursor: not-allowed;
         }
 
         /* Custom File Name text inside the button */
@@ -197,7 +192,7 @@
             font-size: 14px;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 20px;
+            margin-bottom: 15px;
             width: 90%;
             box-sizing: border-box;
             transition: transform 0.2s, opacity 0.2s;
@@ -211,7 +206,7 @@
         /* Embedded Video Player Styling (Hidden Initially) */
         .video-player-wrapper {
             display: none; /* Hides video by default */
-            margin-top: 15px;
+            margin-bottom: 15px;
             width: 100%;
             max-width: 200px;
             border-radius: 12px;
@@ -232,12 +227,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(0, 210, 255, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 210, 255, 0); }
         }
 
         /* Responsive stacking for mobile */
@@ -271,23 +260,23 @@
                 <h2>Original Version</h2>
                 <ul class="features">
                     <li>Playstore version</li>
-                    <li>Latest v0.9.52 beta</li>
+                    <li>Latest v0.9.71 beta</li>
                     <li>Multiplayer working</li>
                 </ul>
-                <!-- Main Original Download Link -->
-                <a href="https://github.com/Lee17rK/Toe3updare/releases/download/Gaming/Truckers-of-Europe3-Original-v0.9.52.apks" class="download-btn btn-original" target="_blank">
-                    Download Here
-                    <span class="file-name">Play Store Version</span>
-                </a>
-                
-                <!-- NEW: Toggle Button for Video -->
+
+                <!-- Tutorial Video appears FIRST above the download button -->
                 <button id="toggle-video-btn" class="tutorial-toggle-btn">📺 How to install APKs: Watch this</button>
                 
-                <!-- Embedded Direct Video Player (Hidden Default) -->
                 <div id="video-container" class="video-player-wrapper">
                     <!-- YouTube Embed URL format -->
                     <iframe src="https://www.youtube.com/embed/01tBMB88Sx0" title="How to install APKs" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
+
+                <!-- Main Original Download Link -->
+                <a href="https://store-eu-par-13.gofile.io/download/web/85de02ee-e9c3-463c-8ae0-b72e0f18980a/Toe3v0.9.71_PS(MoDsWithK).apks" id="original-download-btn" class="download-btn btn-original" target="_blank">
+                    Download Here
+                    <span class="file-name">Play Store Version</span>
+                </a>
             </div>
 
             <!-- Mod Version Side -->
@@ -300,11 +289,13 @@
                     <li>Level 100</li>
                     <li>Ad free</li>
                     <li>Unlocked trailers</li>
-                    <li>V0.9.52</li>
+                    <li>V0.9.71</li>
                 </ul>
-                <a href="https://github.com/Lee17rK/Toe3/releases/download/Toe3/TOE3Mv.MoDsWithK._0.9.52.apk" id="auto-download-btn" class="download-btn btn-mod" target="_blank">
-                    Download Mod Here
-                    <span id="auto-file-info" class="file-name">Fetching file info...</span>
+
+                <!-- Updated to show Uploading Soon -->
+                <a href="javascript:void(0)" class="download-btn btn-mod">
+                    Uploading Soon
+                    <span class="file-name">Please wait for the mod update</span>
                 </a>
             </div>
         </div>
@@ -315,46 +306,18 @@
     </footer>
 
     <script>
-        // File Fetching Logic for MediaFire
-        document.addEventListener("DOMContentLoaded", async () => {
-            const btn = document.getElementById("auto-download-btn");
-            const infoSpan = document.getElementById("auto-file-info");
-            const mediafireUrl = btn.href;
-
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(mediafireUrl)}`;
-
-            try {
-                const response = await fetch(proxyUrl);
-                if (!response.ok) throw new Error("Network response failed");
-                const htmlString = await response.text();
-
-                let fileName = "Download Mod File";
-                const titleMatch = htmlString.match(/<meta property="og:title" content="([^"]+)"/i) || 
-                                   htmlString.match(/<title>(.*?)<\/title>/i);
-                
-                if (titleMatch && titleMatch[1]) {
-                    fileName = titleMatch[1].replace(' - MediaFire', '').trim();
-                }
-
-                let fileSize = "";
-                const sizeMatch = htmlString.match(/Download\s*\(([^)]+)\)/i) || 
-                                  htmlString.match(/File size:\s*<span>([^<]+)<\/span>/i);
-                
-                if (sizeMatch && sizeMatch[1]) {
-                    fileSize = sizeMatch[1];
-                }
-
-                if (fileSize) {
-                    infoSpan.textContent = `${fileName} (${fileSize})`;
-                } else {
-                    infoSpan.textContent = fileName;
-                }
-                
-                btn.setAttribute("download", fileName);
-
-            } catch (error) {
-                console.error("Failed to fetch data:", error);
-                infoSpan.textContent = "Click to Download Mod";
+        // Alert user on Original Download click & open video if it's hidden
+        document.getElementById('original-download-btn').addEventListener('click', function(e) {
+            // Show alert message
+            alert("Must watch how to install apks!");
+            
+            // Automatically expand the video box to ensure they see it
+            const videoContainer = document.getElementById('video-container');
+            const toggleBtn = document.getElementById('toggle-video-btn');
+            
+            if (videoContainer.style.display === 'none' || videoContainer.style.display === '') {
+                videoContainer.style.display = 'block';
+                toggleBtn.textContent = '📺 Hide Video';
             }
         });
 
