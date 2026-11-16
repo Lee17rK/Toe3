@@ -206,7 +206,7 @@
             opacity: 0.9;
         }
 
-        /* Embedded Video Player Styling (Always visible by default now) */
+        /* Embedded Video Player Styling */
         .video-player-wrapper {
             display: block; 
             margin-bottom: 15px;
@@ -282,9 +282,14 @@
             cursor: pointer;
             transition: transform 0.2s;
             box-shadow: 0 4px 15px rgba(56, 239, 125, 0.4);
+            min-width: 200px;
         }
         .modal-btn:hover {
             transform: scale(1.05);
+        }
+        .modal-btn:disabled {
+            opacity: 0.8;
+            cursor: wait;
         }
 
         @keyframes fadeIn {
@@ -388,8 +393,17 @@
         const modal = document.getElementById('custom-alert-modal');
         const proceedBtn = document.getElementById('proceed-download-btn');
         
-        // Updated redirect URL for JS modal
         const originalDownloadUrl = "https://github.com/Lee17rK/Toe3updare/releases/download/Gaming/Toe3v0.9.71_PS.MoDsWithK.apks";
+
+        let countdownTimer;
+        let autoDownloadTimeout;
+
+        // Function to execute the download
+        function executeDownload() {
+            modal.classList.remove('show');
+            proceedBtn.textContent = 'Proceed to Download'; // Reset button text
+            window.open(originalDownloadUrl, '_blank'); // Open the download link
+        }
 
         // Show Animated Custom Alert on Original Download Click
         originalBtn.addEventListener('click', function(e) {
@@ -405,18 +419,44 @@
 
             // Show the modal
             modal.classList.add('show');
+
+            // --- Countdown Timer Logic ---
+            let timeLeft = 3;
+            proceedBtn.textContent = `Proceed to Download (${timeLeft}s)`;
+            
+            // Clear any previous timers to prevent overlapping
+            clearInterval(countdownTimer);
+            clearTimeout(autoDownloadTimeout);
+
+            // Update the button text every second
+            countdownTimer = setInterval(function() {
+                timeLeft -= 1;
+                if (timeLeft > 0) {
+                    proceedBtn.textContent = `Proceed to Download (${timeLeft}s)`;
+                }
+            }, 1000);
+
+            // Trigger the download automatically after 3 seconds
+            autoDownloadTimeout = setTimeout(function() {
+                clearInterval(countdownTimer);
+                executeDownload();
+            }, 3000);
         });
 
-        // Proceed to download when they click the button in the modal
+        // Proceed to download instantly when they click the button in the modal
         proceedBtn.addEventListener('click', function() {
-            modal.classList.remove('show');
-            window.open(originalDownloadUrl, '_blank'); // Open the download link
+            clearInterval(countdownTimer);
+            clearTimeout(autoDownloadTimeout);
+            executeDownload();
         });
 
-        // Close modal if user clicks outside the box
+        // Close modal if user clicks outside the box and cancel auto-download
         modal.addEventListener('click', function(e) {
             if (e.target === modal) {
+                clearInterval(countdownTimer);
+                clearTimeout(autoDownloadTimeout);
                 modal.classList.remove('show');
+                proceedBtn.textContent = 'Proceed to Download'; // Reset button text
             }
         });
 
